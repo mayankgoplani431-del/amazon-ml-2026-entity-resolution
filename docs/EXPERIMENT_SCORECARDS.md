@@ -166,3 +166,129 @@ config: `{"decision": {"empty_scale": 1.3, "n_blend": 1.0}, "model": "stage1+sta
 │ False negatives                 366496 │
 └────────────────────────────────────────┘
 ```
+
+### E05_e02_and_s3  (2026-09-26 17:04)  [INCONCLUSIVE]
+
+
+config: `{"rule": "e02_and_s3", "e04_decision": {"rule": "expected_f", "miss": 0.5, "empty_bias": 1.0, "exclusive": true}}`
+
+```
+┌────────────────────────────────────────┐
+│ EXPERIMENT SCORECARD: E05_e02_and_s3   │
+├────────────────────────────────────────┤
+│ Blocking recall                97.63 % │
+│ Avg candidates / S1               22.1 │
+│ P95 candidates / S1                 25 │
+│ Pair precision                 99.74 % │
+│ Pair recall                    94.32 % │
+│ Macro F0.5                      0.9791 │
+│ Singleton accuracy             98.62 % │
+│ False positives                  19125 │
+│ False negatives                 433788 │
+└────────────────────────────────────────┘
+```
+
+### E05_e04  (2026-09-26 17:04)  [INCONCLUSIVE]
+
+
+config: `{"rule": "e04", "e04_decision": {"rule": "expected_f", "miss": 0.5, "empty_bias": 1.0, "exclusive": true}}`
+
+```
+┌────────────────────────────────────────┐
+│ EXPERIMENT SCORECARD: E05_e04          │
+├────────────────────────────────────────┤
+│ Blocking recall                97.63 % │
+│ Avg candidates / S1               22.1 │
+│ P95 candidates / S1                 25 │
+│ Pair precision                 99.63 % │
+│ Pair recall                    94.94 % │
+│ Macro F0.5                      0.9803 │
+│ Singleton accuracy             98.19 % │
+│ False positives                  27031 │
+│ False negatives                 386393 │
+└────────────────────────────────────────┘
+```
+
+### E05_majority  (2026-09-26 17:04)  [INCONCLUSIVE]
+
+
+config: `{"rule": "majority", "e04_decision": {"rule": "expected_f", "miss": 0.5, "empty_bias": 1.0, "exclusive": true}}`
+
+```
+┌────────────────────────────────────────┐
+│ EXPERIMENT SCORECARD: E05_majority     │
+├────────────────────────────────────────┤
+│ Blocking recall                97.63 % │
+│ Avg candidates / S1               22.1 │
+│ P95 candidates / S1                 25 │
+│ Pair precision                 99.65 % │
+│ Pair recall                    95.08 % │
+│ Macro F0.5                      0.9809 │
+│ Singleton accuracy             98.19 % │
+│ False positives                  25847 │
+│ False negatives                 375465 │
+└────────────────────────────────────────┘
+```
+
+### E05_e04_and_any  (2026-09-26 17:04)  [INCONCLUSIVE]
+
+
+config: `{"rule": "e04_and_any", "e04_decision": {"rule": "expected_f", "miss": 0.5, "empty_bias": 1.0, "exclusive": true}}`
+
+```
+┌────────────────────────────────────────┐
+│ EXPERIMENT SCORECARD: E05_e04_and_any  │
+├────────────────────────────────────────┤
+│ Blocking recall                97.63 % │
+│ Avg candidates / S1               22.1 │
+│ P95 candidates / S1                 25 │
+│ Pair precision                 99.71 % │
+│ Pair recall                    94.77 % │
+│ Macro F0.5                      0.9805 │
+│ Singleton accuracy             98.53 % │
+│ False positives                  21096 │
+│ False negatives                 399451 │
+└────────────────────────────────────────┘
+```
+
+### E05_E02_alone  (2026-09-26 17:04)  [INCONCLUSIVE]
+
+
+config: `{"rule": "E02_alone", "e04_decision": {"rule": "expected_f", "miss": 0.5, "empty_bias": 1.0, "exclusive": true}}`
+
+```
+┌────────────────────────────────────────┐
+│ EXPERIMENT SCORECARD: E05_E02_alone    │
+├────────────────────────────────────────┤
+│ Blocking recall                97.63 % │
+│ Avg candidates / S1               22.1 │
+│ P95 candidates / S1                 25 │
+│ Pair precision                 99.46 % │
+│ Pair recall                    94.61 % │
+│ Macro F0.5                      0.9777 │
+│ Singleton accuracy             97.23 % │
+│ False positives                  39259 │
+│ False negatives                 411417 │
+└────────────────────────────────────────┘
+```
+
+### E05_S3_alone  (2026-09-26 17:04)  [INCONCLUSIVE]
+
+
+config: `{"rule": "S3_alone", "e04_decision": {"rule": "expected_f", "miss": 0.5, "empty_bias": 1.0, "exclusive": true}}`
+
+```
+┌────────────────────────────────────────┐
+│ EXPERIMENT SCORECARD: E05_S3_alone     │
+├────────────────────────────────────────┤
+│ Blocking recall                97.63 % │
+│ Avg candidates / S1               22.1 │
+│ P95 candidates / S1                 25 │
+│ Pair precision                 99.61 % │
+│ Pair recall                    95.25 % │
+│ Macro F0.5                      0.9808 │
+│ Singleton accuracy             97.94 % │
+│ False positives                  28633 │
+│ False negatives                 363039 │
+└────────────────────────────────────────┘
+```

@@ -1,0 +1,11 @@
+TEST agreement  E04->S3 0.995  S3->E04 0.9639  E04->E02 0.9886  E02->S3 0.9905
+(train: E04->S3 0.9955, E04->E02 0.9903, E02->S3 0.9942)
+S4-rule reconstructed pairs: 5752378 {'france': (892392, 3.2), 'india': (2644624, 20.3), 'us': (2215362, 10.6)}
+e02_and_e04  pairs=5715793  ADDED 11549 {'france': (3922, 32.3), 'us': (2619, 50.9), 'india': (5008, 51.5)}  REMOVED 48134 {'france': (18944, 53.0), 'us': (15248, 42.8), 'india': (13942, 47.4)}
+all_three    pairs=5704244  ADDED 0 {}  REMOVED 48134 {'india': (13942, 47.4), 'france': (18944, 53.0), 'us': (15248, 42.8)}
+e04_and_any  pairs=5764522  ADDED 60278 {'france': (17880, 68.1), 'india': (24915, 58.3), 'us': (17483, 73.3)}  REMOVED 48134 {'us': (15248, 42.8), 'france': (18944, 53.0), 'india': (13942, 47.4)}
+majority     pairs=5812656  ADDED 60278 {'us': (17483, 73.3), 'india': (24915, 58.3), 'france': (17880, 68.1)}  REMOVED 0 {}
+e04          pairs=5781994  ADDED 77750 {'india': (31550, 57.4), 'france': (25503, 63.8), 'us': (20697, 69.6)}  REMOVED 48134 {'france': (18944, 53.0), 'india': (13942, 47.4), 'us': (15248, 42.8)}
+country share (pairs, mismatch%) of E04-only-vs-S3 disagreements:
+  S3 yes, E04 no : {'france': (51941, 76.9), 'india': (86605, 58.5), 'us': (76951, 82.8)}
+  E04 yes, S3 no : {'india': (11643, 53.1), 'france': (11545, 46.4), 'us': (5833, 50.2)}

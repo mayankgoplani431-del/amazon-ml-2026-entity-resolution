@@ -200,4 +200,8 @@ def ensemble(v04, v02, v3, rule):
         return v04.select(k).join(pl.concat([v02.select(k), v3.select(k)]).unique(), on=k, how='semi')
     if rule == 'e02_and_s3':
         return v02.select(k).join(v3.select(k), on=k, how='semi')
+    if rule == 'e02_and_e04':
+        return v02.select(k).join(v04.select(k), on=k, how='semi')
+    if rule == 'all_three':
+        return v02.select(k).join(v3.select(k), on=k, how='semi').join(v04.select(k), on=k, how='semi')
     raise ValueError(rule)

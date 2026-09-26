@@ -32,24 +32,36 @@ say('union candidates:', info.height, 'pairs;', round(info.height / lab_q.height
     'legacy-only', info.filter((pl.col('in_e04') == 0) & (pl.col('in_leg') == 1)).height)
 
 # ---------------- E04
-if not os.path.exists(os.path.join(P.MODELS, 'stage1_e04.pkl')):
-    e05.train_e04('stage1_e04')
-s1 = e05.predict_e04('train', 'stage1_e04').with_columns(pl.col('qi').cast(pl.UInt32))
-ctx1 = P.group_stats(s1.select('qi', 'pi', 'stage1_e04'), 'stage1_e04', 'p1')
-if not os.path.exists(os.path.join(P.MODELS, 'stage2_e04.pkl')):
-    e05.train_e04('stage2_e04', extra=ctx1)
-s2 = e05.predict_e04('train', 'stage2_e04', extra=ctx1).with_columns(pl.col('qi').cast(pl.UInt32))
-s2.write_parquet(os.path.join(R, 'oof_e04.parquet'))
-best04, _ = sweep(s2.rename({'stage2_e04': 'p'}), 'p', ntrue, None, None)
-json.dump(best04[1], open(os.path.join(P.MODELS, 'decision_e04.json'), 'w'))
+oof04 = os.path.join(R, 'oof_e04.parquet')
+if os.path.exists(oof04):                      # resume: reuse saved OOF predictions
+    s2 = pl.read_parquet(oof04)
+else:
+    if not os.path.exists(os.path.join(P.MODELS, 'stage1_e04.pkl')):
+        e05.train_e04('stage1_e04')
+    s1 = e05.predict_e04('train', 'stage1_e04').with_columns(pl.col('qi').cast(pl.UInt32))
+    ctx1 = P.group_stats(s1.select('qi', 'pi', 'stage1_e04'), 'stage1_e04', 'p1')
+    if not os.path.exists(os.path.join(P.MODELS, 'stage2_e04.pkl')):
+        e05.train_e04('stage2_e04', extra=ctx1)
+    s2 = e05.predict_e04('train', 'stage2_e04', extra=ctx1).with_columns(pl.col('qi').cast(pl.UInt32))
+    s2.write_parquet(oof04)
+dec04 = os.path.join(P.MODELS, 'decision_e04.json')
+if os.path.exists(dec04):
+    best04 = (None, json.load(open(dec04)))
+else:
+    best04, _ = sweep(s2.rename({'stage2_e04': 'p'}), 'p', ntrue, None, None)
+    json.dump(best04[1], open(dec04, 'w'))
 v04 = apply_rule(s2.rename({'stage2_e04': 'p'}), 'p', best04[1]).select('qi', 'pi')
 say('E04 decision rule', best04[1])
 
 # ---------------- legacy models on the legacy pool (their own training conditions)
 v = {}
 for name in ('E02', 'S3'):
-    sc = e05.score_legacy('train', name).with_columns(pl.col('qi').cast(pl.UInt32))
-    sc.write_parquet(os.path.join(R, f'oof_{name}.parquet'))
+    f = os.path.join(R, f'oof_{name}.parquet')
+    if os.path.exists(f):
+        sc = pl.read_parquet(f)
+    else:
+        sc = e05.score_legacy('train', name).with_columns(pl.col('qi').cast(pl.UInt32))
+        sc.write_parquet(f)
     v[name] = e05.legacy_votes(sc, name)
     say(name, 'rescored on legacy pool:', sc.height, 'pairs')
 

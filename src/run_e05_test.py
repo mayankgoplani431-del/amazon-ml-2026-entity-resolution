@@ -26,11 +26,21 @@ if not P.parts('test', 'feat'):
 ctry = q.select(pl.col('idx_q').alias('qi'), 'country_n')
 del q, p
 
-s1 = e05.predict_e04('test', 'stage1_e04')
-ctx1 = P.group_stats(s1.select('qi', 'pi', 'stage1_e04'), 'stage1_e04', 'p1')
-s2 = e05.predict_e04('test', 'stage2_e04', extra=ctx1)
-v04 = apply_rule(s2.rename({'stage2_e04': 'p'}), 'p', json.load(open(os.path.join(P.MODELS, 'decision_e04.json')))).select('qi', 'pi')
-v = {n: e05.legacy_votes(e05.score_legacy('test', n), n) for n in ('E02', 'S3')}
+VD = os.path.join(P.CACHE, 'e05')
+os.makedirs(VD, exist_ok=True)
+vf = {n: os.path.join(VD, f'test_votes_{n}.parquet') for n in ('E04', 'E02', 'S3')}
+if not all(os.path.exists(f) for f in vf.values()):      # scoring is rule-independent: done once, cached
+    s1 = e05.predict_e04('test', 'stage1_e04')
+    ctx1 = P.group_stats(s1.select('qi', 'pi', 'stage1_e04'), 'stage1_e04', 'p1')
+    s2 = e05.predict_e04('test', 'stage2_e04', extra=ctx1)
+    apply_rule(s2.rename({'stage2_e04': 'p'}), 'p', json.load(open(os.path.join(P.MODELS, 'decision_e04.json')))).select('qi', 'pi').write_parquet(vf['E04'])
+    for n in ('E02', 'S3'):
+        e05.legacy_votes(e05.score_legacy('test', n), n).write_parquet(vf[n])
+    say('test votes cached')
+v04, v = pl.read_parquet(vf['E04']), {n: pl.read_parquet(vf[n]) for n in ('E02', 'S3')}
+if not os.path.exists(os.path.join(P.MODELS, 'e05_rule.json')):
+    say('no e05_rule.json yet: votes cached, stopping before output')
+    sys.exit(0)
 rule = json.load(open(os.path.join(P.MODELS, 'e05_rule.json')))['rule']
 pred = e05.ensemble(v04, v['E02'], v['S3'], rule)
 cand = pl.concat([pl.read_parquet(f, columns=['qi', 'pi']) for f in P.parts('test', 'pr')])

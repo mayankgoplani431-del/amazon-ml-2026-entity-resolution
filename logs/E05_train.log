@@ -1,0 +1,100 @@
+union candidates: 48718482 pairs; 22.08 per S1; e04-only 4587687 legacy-only 4587687 [3s]
+E04 decision rule {'rule': 'expected_f', 'miss': 0.5, 'empty_bias': 1.0, 'exclusive': True} [116s]
+E02 rescored on legacy pool: 44130795 pairs [786s]
+S3 rescored on legacy pool: 44130795 pairs [2291s]
+┌────────────────────────────────────────┐
+│ EXPERIMENT SCORECARD: E05_e02_and_s3   │
+├────────────────────────────────────────┤
+│ Blocking recall                97.63 % │
+│ Avg candidates / S1               22.1 │
+│ P95 candidates / S1                 25 │
+│ Pair precision                 99.74 % │
+│ Pair recall                    94.32 % │
+│ Macro F0.5                      0.9791 │
+│ Singleton accuracy             98.62 % │
+│ False positives                  19125 │
+│ False negatives                 433788 │
+└────────────────────────────────────────┘
+   per-country {'us': 0.98128, 'india': 0.97576} | hard subgroup P=0.9929 R=0.9239 n=854362 | folds {0: 0.97917, 1: 0.97897}
+┌────────────────────────────────────────┐
+│ EXPERIMENT SCORECARD: E05_e04          │
+├────────────────────────────────────────┤
+│ Blocking recall                97.63 % │
+│ Avg candidates / S1               22.1 │
+│ P95 candidates / S1                 25 │
+│ Pair precision                 99.63 % │
+│ Pair recall                    94.94 % │
+│ Macro F0.5                      0.9803 │
+│ Singleton accuracy             98.19 % │
+│ False positives                  27031 │
+│ False negatives                 386393 │
+└────────────────────────────────────────┘
+   per-country {'us': 0.98287, 'india': 0.97646} | hard subgroup P=0.989 R=0.9532 n=884958 | folds {0: 0.98035, 1: 0.98026}
+┌────────────────────────────────────────┐
+│ EXPERIMENT SCORECARD: E05_majority     │
+├────────────────────────────────────────┤
+│ Blocking recall                97.63 % │
+│ Avg candidates / S1               22.1 │
+│ P95 candidates / S1                 25 │
+│ Pair precision                 99.65 % │
+│ Pair recall                    95.08 % │
+│ Macro F0.5                      0.9809 │
+│ Singleton accuracy             98.19 % │
+│ False positives                  25847 │
+│ False negatives                 375465 │
+└────────────────────────────────────────┘
+   per-country {'us': 0.98326, 'india': 0.97728} | hard subgroup P=0.99 R=0.9586 n=888959 | folds {0: 0.9809, 1: 0.98084}
+┌────────────────────────────────────────┐
+│ EXPERIMENT SCORECARD: E05_e04_and_any  │
+├────────────────────────────────────────┤
+│ Blocking recall                97.63 % │
+│ Avg candidates / S1               22.1 │
+│ P95 candidates / S1                 25 │
+│ Pair precision                 99.71 % │
+│ Pair recall                    94.77 % │
+│ Macro F0.5                      0.9805 │
+│ Singleton accuracy             98.53 % │
+│ False positives                  21096 │
+│ False negatives                 399451 │
+└────────────────────────────────────────┘
+   per-country {'us': 0.98292, 'india': 0.97676} | hard subgroup P=0.9915 R=0.9487 n=878579 | folds {0: 0.98054, 1: 0.98037}
+┌────────────────────────────────────────┐
+│ EXPERIMENT SCORECARD: E05_E02_alone    │
+├────────────────────────────────────────┤
+│ Blocking recall                97.63 % │
+│ Avg candidates / S1               22.1 │
+│ P95 candidates / S1                 25 │
+│ Pair precision                 99.46 % │
+│ Pair recall                    94.61 % │
+│ Macro F0.5                      0.9777 │
+│ Singleton accuracy             97.23 % │
+│ False positives                  39259 │
+│ False negatives                 411417 │
+└────────────────────────────────────────┘
+   per-country {'us': 0.98004, 'india': 0.97416} | hard subgroup P=0.9838 R=0.9327 n=870530 | folds {0: 0.97776, 1: 0.97761}
+┌────────────────────────────────────────┐
+│ EXPERIMENT SCORECARD: E05_S3_alone     │
+├────────────────────────────────────────┤
+│ Blocking recall                97.63 % │
+│ Avg candidates / S1               22.1 │
+│ P95 candidates / S1                 25 │
+│ Pair precision                 99.61 % │
+│ Pair recall                    95.25 % │
+│ Macro F0.5                      0.9808 │
+│ Singleton accuracy             97.94 % │
+│ False positives                  28633 │
+│ False negatives                 363039 │
+└────────────────────────────────────────┘
+   per-country {'us': 0.98319, 'india': 0.9773} | hard subgroup P=0.9896 R=0.9654 n=895773 | folds {0: 0.98086, 1: 0.98081}
+agreement: E04->E02 0.9903 E04->S3 0.9955 E02->S3 0.9942 [2338s]
+shape: (3, 6)
+┌─────────────────────┬──────────┬──────────┬───────────┬───────────┬────────────────┐
+│ src                 ┆ len      ┆ pos_rate ┆ p50       ┆ p90       ┆ uncertain_frac │
+│ ---                 ┆ ---      ┆ ---      ┆ ---       ┆ ---       ┆ ---            │
+│ str                 ┆ u32      ┆ f64      ┆ f32       ┆ f32       ┆ f64            │
+╞═════════════════════╪══════════╪══════════╪═══════════╪═══════════╪════════════════╡
+│ foreign_legacy_only ┆ 4587687  ┆ 0.000631 ┆ 5.5781e-8 ┆ 2.6547e-7 ┆ 0.000476       │
+│ both                ┆ 39543108 ┆ 0.188402 ┆ 1.4441e-7 ┆ 0.99999   ┆ 0.010486       │
+│ e04_only            ┆ 4587687  ┆ 0.000885 ┆ 6.5914e-8 ┆ 3.6234e-7 ┆ 0.000485       │
+└─────────────────────┴──────────┴──────────┴───────────┴───────────┴────────────────┘
+done [2341s]
